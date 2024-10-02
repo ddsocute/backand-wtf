@@ -1,6 +1,0 @@
-Chris 60 70 80
-Jay 100 90 95
-Coco 85 80 95
-Amy 90 95 90
-Quincy 80 100 90
-Hsiu 100 60 80
