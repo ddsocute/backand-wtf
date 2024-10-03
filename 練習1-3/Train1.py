@@ -24,10 +24,10 @@ def show_txt():
             data_full_list[i].append(each_person_total_round)
             each_person_avg_round = round(each_person_total / 3, 2)
             data_full_list[i].append(each_person_avg_round)
-        print(*data_full_list, sep='\n')
+        return data_full_list
 
 
 if __name__ == "__main__":
-    show_txt()
+    print(*show_txt(), sep='\n')
 
 
