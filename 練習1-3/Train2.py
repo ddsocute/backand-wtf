@@ -75,8 +75,6 @@ def search_for_name():
             findname = input("please input the student name\n")
 
 
-
-
 if __name__ == "__main__":
     while True:  # while bool (no ()):
         show_interface()
