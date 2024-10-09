@@ -24,10 +24,11 @@ def load_txt(txt_path):
         each_person.extend([each_person_total, each_person_average])
     return data_full_list_local  # 先只輸出數字方便後續練習使用
 
-def print_txt(txt_not_formated_local):
-    data_full_list = txt_not_formated_local
+
+def print_txt(txt_unformatted_local):
+    data_full_list_unformatted = txt_unformatted_local
     data_full_list_str = []  # 用以儲存等等格式化後列表
-    for line in data_full_list:
+    for line in data_full_list_unformatted:
         for index, each in enumerate(line):
             if isinstance(each, float):  # isdigit() 只能判斷"字串"中是否有數字
                 line[index] = f"{each:.2f}"  # 在這邊將所有數字格式化到小數第二位
@@ -37,6 +38,7 @@ def print_txt(txt_not_formated_local):
         formated_row = [f"{item:>10}" for item in row]
         print(" ".join(formated_row))
 
+
 if __name__ == "__main__":
-    txt_not_formated = load_txt(TXT_PATH)
-    print_txt(txt_not_formated)
+    txt_unformatted = load_txt(TXT_PATH)
+    print_txt(txt_unformatted)

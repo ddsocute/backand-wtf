@@ -1,9 +1,7 @@
 # this is a Train3 project
-# focus on or five function to user
+# focus on build five function in OOP format
 
-
-from Train1 import load_txt, TXT_PATH
-from Train2 import show_interface, print_student_score, GRADE_FULL_LIST
+from Train2 import show_interface, GRADE_FULL_LIST
 
 HEADER = ["name", "grade1", "grade2", "grade3", "total", "average"]
 
@@ -15,23 +13,20 @@ class Student:
         self.grade2 = grade2
         self.grade3 = grade3
         self.total = total
-        self.average = average
+        self.average = average  # 初始化單個實例
 
 
-class Student_list:
+class StudentList:
     def __init__(self):
-        self.students_list = []
-
-    def __len__(self):
-        return len(self.students_list)
+        self.students_list = []  # 儲存管理實例
 
     def add_student(self, name, grade1, grade2, grade3, total, average):
-        student = Student(name, grade1, grade2, grade3, total, average)
-        self.students_list.append(student)  # 字典裡面包實例
+        student_object = Student(name, grade1, grade2, grade3, total, average)
+        self.students_list.append(student_object)  # 新增實例至student_list
 
     def print_student_score(self):
-        fomated_header = " ".join(f"{item:>10}" for item in HEADER)
-        print(fomated_header)
+        formatted_header = " ".join(f"{item:>10}" for item in HEADER)
+        print(formatted_header)
         for each in self.students_list:
             row = [each.name, f"{each.grade1:.2f}", f"{each.grade2:.2f}", f"{each.grade3:.2f}",
                    f"{each.total:.2f}", f"{each.average:.2f}"]
@@ -40,11 +35,11 @@ class Student_list:
 
     def print_subject_score(self):
         subject_size = len(GRADE_FULL_LIST[0][1:-2])  # 先隨邊挑一行確認總共有幾個grade 再扣三（姓名 總分 平均）
-        subject_list = [[] for _ in range(subject_size)]
+        subject_list = [[] for _ in range(subject_size)]  # _表示不需要用到此循環變涼
         for each_student in self.students_list:
             for i in range(subject_size):  # 取第二到倒數第三的grade sco"re
-                grade_seperate = getattr(each_student, f"grade{i + 1}")
-                subject_list[i].append(grade_seperate)
+                grade_separated = getattr(each_student, f"grade{i + 1}")  # 獲取對象屬性值
+                subject_list[i].append(grade_separated)
         for index, sum_list in enumerate(subject_list):  # 把每科列表數字起來得出每科總和
             print(f"grade{index + 1} total is: {sum(sum_list):.2f} ,"
                   f" average is: {sum(sum_list) / len(GRADE_FULL_LIST):.2f}")
@@ -64,55 +59,53 @@ class Student_list:
 
     def print_name_data(self):
         print_list = []
-        finded_number = 0
+        found_number = 0  # 計算找到人數
         exit_print = False
-        student_name_list = []
-        finded_name = input("please input the student name\n")
+        student_name_list = []  # 建立一個放學生名字的列表
         for each_student in GRADE_FULL_LIST:
-            student_name_list.append(each_student[0])  # 建立一個放學生名字的列表
+            student_name_list.append(each_student[0])
         while not exit_print:
+            found_name = input("please input the student name\n")
             for name in student_name_list:
-                if finded_name.casefold() in name.casefold():
-                    finded_number += 1
+                if found_name.casefold() in name.casefold():
+                    found_number += 1
                     index = student_name_list.index(name)
-                    name_data = self.students_list[index]  # 找到該學生所有資料
-                    values = list(name_data.__dict__.values())
+                    name_data = self.students_list[index]  # 找到該學生
+                    values = list(name_data.__dict__.values())  # 把該學生所有值輸入列表
                     print_list.append(values)
-            print(f"find {finded_number} student\n")
-            for finded_student in print_list:
-                for key, data in zip(HEADER, finded_student):
+            print(f"find {found_number} student\n")
+            for found_student in print_list:
+                for key, data in zip(HEADER, found_student):
                     if isinstance(data, float):  # 如果是數字先格式化到小數點第二位 後面才不會因為有名字而無法格式化
                         data = f"{data:>.2f}"
                     print(f"{key:^7} : {data:^7}")
                 print(" ")
-            if finded_number == 0:
-                find_name = input(f"You enter the wrong name\n"
-                                  "please input the student name\n")
+            if found_number == 0:
+                print(f"You enter the wrong name")
             else:
                 exit_print = True
 
 
 if __name__ == "__main__":
     exit_option = False
-    student = Student_list()
-    student_list_object = []
+    student = StudentList()  # 創建一個 StudentList 類的新實例
     for each_list in GRADE_FULL_LIST:
-        name, grade1, grade2, grade3, total, average = each_list
-        student.add_student(name, grade1, grade2, grade3, total, average)
-    if __name__ == "__main__":
-        while not exit_option:
-            show_interface()
-            option = input()
-            if option == "1":
-                student.print_student_score()
-            elif option == "2":
-                student.print_subject_score()
-            elif option == "3":
-                student.print_students_rank()
-            elif option == "4":
-                student.print_name_data()
-            elif option == "5":
-                print("See you next time")
-                exit_option = True
-            else:
-                print("Wrong input!! Please enter again.")
+        [name_object, grade1_object, grade2_object, grade3_object, total_object, average_object] = each_list
+        student.add_student(name_object, grade1_object, grade2_object, grade3_object, total_object, average_object)
+    # 調用 student 實例中的add_student 將拆包後的學生資料天價到 Student_list 中
+    while not exit_option:
+        show_interface()
+        option = input()
+        if option == "1":
+            student.print_student_score()
+        elif option == "2":
+            student.print_subject_score()
+        elif option == "3":
+            student.print_students_rank()
+        elif option == "4":
+            student.print_name_data()
+        elif option == "5":
+            print("See you next time")
+            exit_option = True
+        else:
+            print("Wrong input!! Please enter again.")
