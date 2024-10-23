@@ -1,0 +1,219 @@
+
+1. 不要出現魔法數字：像 for i in range(1, 4):
+   因為很難維護 真的要用記得寫註解 或直接設為常數
+   但最好是用型別、長度判斷次數也比較有變動性
+
+2.要考慮到使用者介面舒適度
+
+3.儲存：intellij手動按鍵為 command + s 自動儲存：默認為15s
+
+4.變數儘量不要global呼叫 要以參數形式傳進函數
+
+5.宣告離函數近一點
+
+6.For else 迴圈：
+    for item in iterable:
+        # 迴圈主體
+    else:
+        # else 區塊
+    迴圈正常完成所有迭代後,會執行 else 區塊。
+    如果迴圈因為 break 語句提前結束,則不會執行 else 區塊。
+
+7.List slicing:
+    list[start:stop:step]
+    reversed_list = list[::-1] 反轉
+  其他 list 操作：
+    my_list.append(6)  # 在末尾添加
+    my_list.insert(0, 0)  # 在指定位置插入
+    my_list.extend([7, 8, 9])  # 擴展列表
+    length = len(my_list)  # 獲取長度
+    index = my_list.index(4)  # 查找元素索引
+    count = my_list.count(2)  # 計算元素出現次數
+    max_value = max(my_list)  # 最大值
+    min_value = min(my_list)  # 最小值
+    sum_value = sum(my_list)  # 求和
+    my_list.remove(3)  # 刪除指定值
+    del my_list[0]  # 刪除指定索引的元素
+    popped = my_list.pop()  # 刪除並返回最後一個元素
+    my_list.clear()  # 清空列表
+    squares = [x**2 for x in range(10)]  列表推導式 [表達式 for 元素 in 可迭代對象 if 條件]
+    shallow_copy = my_list.copy()   複製列表
+
+8.Str.isdigital:
+    如果字串中所有字符都是數字,返回 True。(小數點、負號是為非數字）
+    如果字串中包含任何非數字字符,或字串為空,返回 False。
+    好的,我會為您簡潔地整理這些字串檢查方法,不包含舉例:
+    其他用法：
+    1. str.isdigit()
+       - 檢查字串是否只包含數字字符(包括基本數字0-9以及某些Unicode數字字符,如上標數字(²,³等))
+    2. str.isnumeric()
+       - 檢查字串是否只包含數字字符(包括數字0-9、分數(½,¼等)、羅馬數字等)
+    3. str.isdecimal()
+       - 檢查字串是否只包含十進制數字(只接受十進制數字0-9 不接受上標數字、分數等其他數字形式)
+    P.S.以上三個都不接受小數與複數，如果要的話要自訂函數，用try except去判斷
+    4. str.isalpha()
+       - 檢查字串是否只包含字母
+    5. str.isalnum()
+       - 檢查字串是否只包含字母和數字
+    6. str.isspace()
+       - 檢查字串是否只包含空白字符
+    7. str.islower()
+       - 檢查字串是否全為小寫
+    8. str.isupper()
+       - 檢查字串是否全為大寫
+    9. str.istitle()
+       - 檢查字串是否為標題格式(每個單詞首字母大寫)
+    這些方法都返回布爾值(True或False),可以直接用於條件判斷。
+
+9.python格式化語法：
+    number = 123.456
+    print(f"數字是 {number:.2f}")  # 輸出: 數字是 123.46
+    num = 1234567.89
+    格式化規範:
+        d: 用於格式化整數
+        f: 用於格式化浮點數
+        e 或 E: 用於科學記數法表示
+        g 或 G: 根據值的大小自動選擇使用f或e格式
+        %: 將數值轉換為百分比表示
+    對齊和填充:
+        <: 左對齊文本
+        >: 右對齊文本
+        ^: 居中對齊文本
+        可以指定填充字符,例如使用0進行填充
+    寬度和精度:
+        寬度: 指定整個輸出的最小字符數
+        精度: 對於浮點數,指定小數點後的位數,使用.來指定
+    千位分隔符:
+        ,: 在數字中使用逗號作為千位分隔符
+    範例：
+    print(f"{num:,.2f}")  # 1,234,567.89 (使用逗號作為千位分隔符,保留兩位小數)
+    print(f"{num:>15,.2f}")  # 1,234,567.89 (右對齊,總寬度15字符)
+    print(f"{num:015.2f}")  # 00001234567.89 (使用0填充,總寬度15字符,包括小數點和小數位)
+    print(f"{num:.2%}")  # 123456789.00% (轉換為百分比,保留兩位小數)
+    print(f"{num:e}")  # 1.234568e+06 (使用科學記數法)
+    在字串中使用{}作為佔位符,表示要插入值的位置。
+    {[index/name]:[fill][align][sign][width][.precision][type]}
+
+
+10.Enumerate:
+   是一個內建函數,主要用於在迭代時同步獲取索引和元素值,避免手動維護計數器
+   每次迭代會返回一個包含兩個元素的元組:(索引, 元素值)
+   基本語法：
+    enumerate(iterable, start=0)
+   使用方法：
+       fruits = ['apple', 'banana', 'cherry']
+       for index, fruit in enumerate(fruits):
+           print(f"Index {index}: {fruit}")
+   原理：
+        a. 創建一個計數器,初始值為 start 參數指定的值(默認為0)
+        b. 迭代輸入的可迭代對象
+        c. 對於每個元素,生成一個元組 (當前計數器值, 當前元素)
+        d. 計數器加1
+        e. 重複步驟 c 和 d,直到迭代完所有元素
+
+11. arg 與 karg：
+    *args (Arguments):
+        用於傳遞不定數量的非關鍵字參數（positional arguments）。
+        在函數內部，args 是一個元組（tuple）。
+        允許函數接受任意數量的位置參數。
+        例子：
+            def sum_numbers(*args):
+                total = 0
+                for num in args:
+                    total += num
+                return total
+
+            print(sum_numbers(1, 2, 3))  # 輸出: 6
+            print(sum_numbers(1, 2, 3, 4, 5))  # 輸出: 15
+
+    **kwargs (Keyword Arguments):
+        用於傳遞不定數量的關鍵字參數（keyword arguments）。
+        在函數內部，kwargs 是一個字典（dictionary）。
+        允許函數接受任意數量的關鍵字參數。
+        例子：
+            def print_info(**kwargs):
+                for key, value in kwargs.items():
+                    print(f"{key}: {value}")
+
+             print_info(name="Alice", age=30, city="New York")
+            # 輸出:
+            # name: Alice
+            # age: 30
+            # city: New York
+    如果同時使用 *args 和 **kwargs，*args 必須在 **kwargs 之前。
+
+12.with open(TXT_PATH, "r") as open_txt:
+        loaded_txt = open_txt.readlines()
+        with 是一個上下文管理器,用於確保文件在使用後正確關閉,即使發生異常也能保證關閉文件。
+        open() 是Python的內建函數,用於打開文件。TXT_PATH 是文件路徑。
+        "r" 表示以只讀模式打開文件。
+        as open_txt:將打開的文件對象賦值給變量 open_txt。
+        readlines() 方法讀取文件的所有行,返回一個列表,每個元素是文件中的一行。
+        將讀取的內容賦值給 loaded_txt 變量。
+
+13. .join():
+    separator.join(iterable)
+    separator: 用於分隔 iterable 中元素的字符串
+    iterable: 要連接的可迭代對象(如列表、元組、字符串等)
+    比使用 + 運算符連接字符串更高效,特別是對於大量元素,但所有元素必須是字符串,否則會引發 TypeError
+    因為可以預先計算結果字符串的長度,從而減少內存重新分配的次數。
+    舉例：
+        words = ['Hello', 'world', 'Python']
+        result = ' '.join(words)
+        print(result)  # 輸出: Hello world Python
+    背後原理:
+        join() 方法首先創建一個空的結果字符串。接著遍歷 iterable 中的每個元素。
+        對於除最後一個元素外的每個元素,它將元素添加到結果字符串中,然後添加分隔符。
+        最後一個元素被添加到結果字符串中,但不添加分隔符。最後返回最終的結果字符串。
+
+14.順序：檔頭 import 宣告 主程式
+
+15.zip()：
+    zip(*iterables)
+        其中*iterables表示可以傳入任意數量的可迭代對象
+        "*"解包運算符(unpacking operator) 在這裡的作用是將一個包含多個可迭代對象的序列解包,使每個可迭代對象成為 zip() 的單獨參數。
+    zip()函數用於將多個可迭代對象(如列表、元組等)中對應位置的元素打包成一個個元組,然後返回由這些元組組成的迭代器
+    原理：
+        zip()會同時遍歷所有傳入的可迭代對象。
+        每次迭代時,從每個可迭代對象中取出一個元素,組成一個元組。
+        返回由這些元組組成的迭代器。
+        當最短的可迭代對象遍歷完畢時,zip()就會停止
+    可迭代對象是一堆可以一個個拿出來的東西 列表等
+    迭代器是負責一個個拿出這些東西的工具。
+
+16.sorted(zipped, key=lambda x: x[1], reverse=True)：
+    list.sort(key=None, reverse=False)
+        sort()函數會直接修改原列表,不會返回新的列表。
+        只能用於列表,不能用於其他可迭代對象。
+    sorted(iterable, key=None, reverse=False)
+        sorted()函數返回一個新的排序後的列表，不會修改原始數據。
+        它可以用於任何可迭代對象，不僅限於列表。
+    lambda arguments: expression
+        lambda是Python的保留字，用於定義匿名函數。
+        arguments（參數）是函數的輸入參數。可以有零個或多個參數。多個參數用逗號分隔。
+        expression（表達式）這是函數的返回值。必須是單一的表達式，不能包含複雜的語句。
+
+17.getattr()
+    是 Python 中的一個內建函數用於獲取對象的屬性值
+    getattr(object, attribute[, default])  方括號代表可選擇的
+        object：要獲取屬性的對象。
+        attribute：要獲取的屬性名稱（字符串）。
+        default：可選參數，如果指定的屬性不存在，則返回這個默認值。
+
+18.casefold()
+    是 Python 字串（string）的一個方法，用於將字串轉換為小寫形式 比lower()更激進 適合處理多語言文本
+    result = string.casefold()
+
+.isinstance()：???
+    isinstance(object, classinfo)
+    如果 object 是 classinfo 的實例或子類的實例,返回 True,否則返回 False
+    背後原理:
+    isinstance() 使用對象的 class 屬性和類的 bases 屬性來檢查類型關係。
+    它首先檢查 object 的 class 是否與 classinfo 相同。
+    如果不同,則遞歸檢查 object.class 的所有基類(通過 bases 屬性)。
+    對於元組形式的 classinfo,只要 object 是其中任一類型的實例,就返回 True。
+
+
+
+
+Static method 一般method分辨????

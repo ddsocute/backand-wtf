@@ -1,9 +1,11 @@
+#檔頭 import 宣告 主程式
 # this is a Train2 project
 # focus on building five function to user
 
-TXT_PATH = "/Users/ss580/Desktop/backand-wtf/練習1-3/grade.txt"
+TXT_PATH = "/練習1-3(2024.10.04)/grade.txt"
 
 from Train1 import show_txt
+# TODO: change location
 
 
 def show_interface():
@@ -25,10 +27,10 @@ def print_subject_score():
     grade1_total_float = 0
     grade2_total_float = 0
     grade3_total_float = 0
-    grade1_average_total = 0
-    grade2_average_total = 0
-    grade3_average_total = 0
-    for each_person in range(1, 7):
+    # grade1_average_total = 0
+    # grade2_average_total = 0
+    # grade3_average_total = 0
+    for each_person in range(1, 7):#mmm
         grade1_total_float += grade_full_list[each_person][1]
         grade2_total_float += grade_full_list[each_person][2]
         grade3_total_float += grade_full_list[each_person][3]
@@ -41,10 +43,11 @@ def print_subject_score():
 
 
 def rank_students():
+    #
     eachperson_average_list = []
     eachperson_name_list = []
     grade_full_list = show_txt()
-    for eachperson_data_list in range(1, 7):
+    for eachperson_data_list in range(1, 7):#mmm 寫索引即可
         eachperson_average_list.append(grade_full_list[eachperson_data_list][-1])
         eachperson_name_list.append(grade_full_list[eachperson_data_list][0])
     zipped = list(zip(eachperson_name_list, eachperson_average_list))
@@ -58,7 +61,7 @@ def search_for_name():
     student_list = []
     grade_full_list = show_txt()
     findname = input("please input the student name\n")
-    for each_student in range(1, 7):
+    for each_student in range(1, 7):#mmm
         student_list.append(grade_full_list[each_student][0])
     while True:
         if findname in student_list:
@@ -79,12 +82,12 @@ if __name__ == "__main__":
     while True:  # while bool (no ()):
         show_interface()
         option = input()
-        if (option == "1"):
+        if (option == "1"): #TODO: 不用括號
             print_student_score()
         elif (option == "2"):
             print_subject_score()
         elif (option == "3"):
-            rank_students()
+            rank_students()#TODO: 一致性
         elif (option == "4"):
             search_for_name()
         elif (option == "5"):

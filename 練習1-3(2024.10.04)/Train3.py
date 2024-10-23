@@ -1,9 +1,9 @@
 # this is a Train3 project
 # focus on or five function to user
 
-TXT_PATH = "/Users/ss580/Desktop/backand-wtf/練習1-3/grade.txt"
+TXT_PATH = "/練習1-3(2024.10.04)/grade.txt"
 
-from Train1 import show_txt
+from Train1 import show_txt#change location
 from Train2 import show_interface, print_student_score
 
 grade1_total_float = 0
@@ -15,6 +15,8 @@ grade3_average_total = 0
 eachperson_average_list = []
 eachperson_name_list = []
 student_name_list = []
+
+
 grade_full_list = show_txt()
 
 
@@ -84,7 +86,7 @@ if __name__ == "__main__":
     student5 = student(grade_full_list[5][0], grade_full_list[5][1], grade_full_list[5][2], grade_full_list[5][3],
                        grade_full_list[5][4], grade_full_list[5][5])
     student6 = student(grade_full_list[6][0], grade_full_list[6][1], grade_full_list[6][2], grade_full_list[6][3],
-                       grade_full_list[6][4], grade_full_list[6][5])
+                       grade_full_list[6][4], grade_full_list[6][5])#TODO:each line read
     student_list = [student1, student2, student3, student4, student5, student6]
 
     while True:  # while bool (no ()):

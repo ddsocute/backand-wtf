@@ -1,0 +1,11 @@
+
+1.命名規則:
+
+2.怕改到原本數據要先複製一份
+    txt_unformatted = txt_unformatted_local.copy()
+
+3.物件無法用迴圈處理 因為屬性沒有順序
+
+4.為什麼主程式與類別中的變數命名不能相同
+
+5.total = sum(map(float, grade_list))

@@ -1,5 +1,5 @@
 # this is a Train3 project
-# focus on build five function in OOP format
+#
 
 from Train2 import show_interface, GRADE_FULL_LIST  # import load_txt
 
@@ -20,16 +20,16 @@ class Student:
 
 class StudentList:
     def __init__(self):
-        self.students_list = []  # 儲存管理實例  # TODO: self.students = load_txt()
+        self.students = []  # 儲存管理實例  # TODO: self.students = load_txt()
 
     def add_student(self, name, grade1, grade2, grade3, total, average):
         student_object = Student(name, grade1, grade2, grade3, total, average)
-        self.students_list.append(student_object)  # 新增實例至student_list
+        self.students.append(student_object)  # 新增實例至student_list
 
     def print_student_score(self):
         formatted_header = " ".join(f"{item:>10}" for item in HEADER)
         print(formatted_header)
-        for each in self.students_list:
+        for each in self.students:
             row = [each.name, f"{each.grade1:.2f}", f"{each.grade2:.2f}", f"{each.grade3:.2f}",
                    f"{each.total:.2f}", f"{each.average:.2f}"]
             formatted_row = " ".join([f"{item:>10}" for item in row])
@@ -38,7 +38,7 @@ class StudentList:
     def print_subject_score(self):
         subject_size = len(GRADE_FULL_LIST[0][1:-2])  # 先隨邊挑一行確認總共有幾個grade 再扣三（姓名 總分 平均）
         subject_list = [[] for _ in range(subject_size)]  # _表示不需要用到此循環變涼
-        for each_student in self.students_list:
+        for each_student in self.students:
             for i in range(subject_size):  # 取第二到倒數第三的grade sco"re
                 grade_separated = getattr(each_student, f"grade{i + 1}")  # 獲取對象屬性值
                 subject_list[i].append(grade_separated)
@@ -49,7 +49,7 @@ class StudentList:
     def print_students_rank(self):
         each_student_average_list = []
         each_student_name_list = []
-        for each in self.students_list:
+        for each in self.students:
             each_student_average_list.append(each.average)
             each_student_name_list.append(each.name)
         zipped = zip(each_student_name_list, each_student_average_list)  # 裝包
@@ -72,10 +72,10 @@ class StudentList:
                 if found_name.casefold() in name.casefold():
                     found_number += 1
                     index = student_name_list.index(name)
-                    name_data = self.students_list[index]  # 找到該學生
-                    values = list(name_data.__dict__.values())  # 把該學生所有值輸入列表 TODO
+                    name_data = self.students[index]  # 找到該學生
+                    values = list(name_data.__dict__.values())
+                    # 把該學生所有值輸入列表 TODO
                     # 1. code it row by row, 2. def __str__ or __repr__ in Student
-                    # values = str(name_data)
                     print_list.append(values)
             print(f"find {found_number} student\n")
             for found_student in print_list:

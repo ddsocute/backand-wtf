@@ -4,7 +4,6 @@
 from Train1 import load_txt, print_txt, TXT_PATH
 
 GRADE_FULL_LIST = load_txt(TXT_PATH)  # load data  write in main function
-STUDENTS_LENGTH = len(GRADE_FULL_LIST)  # TODO: useless
 
 
 def show_interface():
@@ -18,22 +17,28 @@ def show_interface():
 
 
 def print_student_score():
+    """
+    print grades list like train1
+    :return: formatted total grades list(contain total and average)
+    """
     txt_not_formated = load_txt(TXT_PATH)
     print_txt(txt_not_formated)
 
 
 def print_subject_score():
-    subject_size = len(GRADE_FULL_LIST[0][1:-2])  # 先隨邊挑一行確認總共有幾個grade
-    # TODO:mmmm
-    subject_list = [[] for _ in range(subject_size)]  # 依照成績數新增列表數量
-    for each_student in GRADE_FULL_LIST:
-        for index, subject in enumerate(each_student[1:-2]):  # 取第二到倒數第三的grade score
-            subject_list[index].append(subject)  # 把每科成績輸入對應的列表中
-            # TODO: calculate sum directly, append is not necessary.
-    # subject_list = [[item for item in row[1:-2]] for row in GRADE_FULL_LIST]  # TODO
-    for index, sum_list in enumerate(subject_list):  # 把每科列表數字起來得出每科總和
-        print(f"grade{index + 1} total is: {sum(sum_list):.2f} ,"
-              f" average is: {sum(sum_list) / len(GRADE_FULL_LIST):.2f}")   # TODO:計算跟顯示分開
+    subject_size = len(GRADE_FULL_LIST[0][1:-2])
+    # [0] present first row in grades list
+    # [1:-2] present total column exclude name, total, average
+    subject_list = [[subject for subject in row[1:-2]]
+                    for row in GRADE_FULL_LIST]
+    subject_total_list = list(zip(*subject_list))
+    # build a list to place each student's subject score
+    for index, sum_list in enumerate(subject_total_list):
+        # 把每科列表數字起來得出每科總和
+        total = sum(sum_list)
+        average = total / len(subject_total_list)
+        print(f"grade{index + 1} total is: {total:.2f} ,"
+              f" average is: {average:.2f}")
 
 
 def print_students_rank():
@@ -46,13 +51,13 @@ def print_students_rank():
     sorted_zipped = sorted(zipped, key=lambda x: x[1], reverse=True)
     # zipped.sort()  # this line do not return anything.
 
-    sorted_names, sorted_grades = zip(*sorted_zipped)  # 解包將zip回傳的迭代器裡的元組 重組成兩個元組 TODO
-    for rank, name, grade in zip(range(1, len(GRADE_FULL_LIST) + 1), sorted_names, sorted_grades):
-        # 用zip一一對應排名、名字與成績在輸出 TODO
-        print(f"rank{rank} is {name:^7}  average grade is {grade:.2f}")  # 格式化輸出
-    # for i in range(1, len(GRADE_FULL_LIST) + 1):
-    #     rank, name, grade = i, sorted_names[i - 1], sorted_grades[i - 1]
-    #     print()
+    sorted_names, sorted_grades = zip(
+        *sorted_zipped)  # 解包將zip回傳的迭代器裡的元組 重組成兩個元組
+    for i in range(1, len(GRADE_FULL_LIST) + 1):
+        rank, name, grade = i, sorted_names[i - 1], sorted_grades[i - 1]
+        print(
+            f"rank{rank} is {name:^7}  average grade is {grade:.2f}")
+        # 格式化輸出
 
 
 def print_name_data():
@@ -62,19 +67,22 @@ def print_name_data():
     find_name = input("please input the student name\n")
     for each_student in GRADE_FULL_LIST:
         student_name_list.append(each_student[0])  # 建立一個放學生名字的列表
-    while not exit_print:
+    while True:
         # TODO: for-loop
-        if find_name in student_name_list:
-            find_list = GRADE_FULL_LIST[student_name_list.index(find_name)]  # 找到該學生所有資料
-            for index, data in enumerate(find_list):
-                if isinstance(data, float):  # 如果是數字先格式化到小數點第二位 後面才不會因為有名字而無法格式化
-                    data = f"{data:>.2f}"
-                print(f"{head_line[index]:^7} : {data:^7}")
-            exit_print = True
+        for each_student in GRADE_FULL_LIST:
+            if find_name == each_student[0]:
+                for index, data in enumerate(each_student):
+                    if isinstance(data, float):
+                        # 如果是數字先格式化到小數點第二位
+                        # 後面才不會因為有名字而無法格式化
+                        data = f"{data:>.2f}"
+                    print(f"{head_line[index]:^7} : {data:^7}")
+                break
         else:
             find_name = input(f"You enter the wrong name\n"
                               "please input the student name\n")
-
+            continue
+        break
 
 if __name__ == "__main__":
     exit_option = False

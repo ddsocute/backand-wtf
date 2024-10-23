@@ -5,7 +5,7 @@ import pandas as pd
 
 # read and download
 grade = pd.read_csv(
-    '/Users/ss580/Desktop/python/python/grade.txt',
+    "/練習1-3(2024.10.04)/grade.txt",
     sep=" ",
     header=None,
     names=["name", "grade1", "grade2", "grade3"],
