@@ -9,3 +9,55 @@
 4.為什麼主程式與類別中的變數命名不能相同
 
 5.total = sum(map(float, grade_list))
+    map(function, iterable, ...)
+    function：這是應用於每個元素的函數。
+    iterable：這是你想要操作的可迭代對象（如列表、元組等）。你也可以傳入多個可迭代對象。
+    map 會將 function 應用到 iterable 中的每個元素，並返回一個包含所有結果的 map 對象。
+6.try except
+    try：放置可能會發生異常的代碼。
+	except：當異常發生時捕捉並處理錯誤。
+	else：如果 try 區塊沒有發生異常，執行 else 區塊。
+	finally：無論是否發生異常，finally 區塊都會執行，用於清理操作。
+
+    ValueError
+    當操作或函數接收到無效的值時引發，特別是在數值或類型轉換時。
+    例如：int("abc") 會引發 ValueError。
+
+    TypeError
+    當操作或函數應用於不正確的數據類型時引發。
+    例如：試圖將數字和字符串相加會引發 TypeError："abc" + 5。
+
+    IndexError
+    當試圖訪問超出序列範圍的索引時引發（如列表、元組等）。
+    例如：my_list[10]，當 my_list 只有 3 個元素時。
+
+    KeyError
+    當嘗試在字典中訪問不存在的鍵時引發。
+    例如：my_dict["non_existent_key"]。
+
+    ZeroDivisionError
+    當除數為零時引發。
+    例如：10 / 0。
+
+    FileNotFoundError
+    當試圖打開一個不存在的文件時引發。
+    例如：open("non_existent_file.txt", "r")。
+
+    AttributeError
+    當對象沒有預期的屬性或方法時引發。
+    例如：my_list.non_existent_method()，列表對象中沒有這個方法。
+
+    ImportError
+    當模組導入失敗時引發。
+    例如：import non_existent_module。
+
+    NameError
+    當變數未定義或無法找到時引發。
+    例如：print(undeclared_variable)。
+
+    RuntimeError
+    當出現未知或無法分類的運行時錯誤時引發。
+
+    AssertionError
+    當 assert 語句失敗時引發，通常用於進行程式內部的斷言檢查。
+    例如：assert 2 + 2 == 5。
